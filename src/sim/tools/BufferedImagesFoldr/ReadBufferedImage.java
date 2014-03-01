@@ -1,4 +1,4 @@
-﻿package sim.tools.BufferedImagesFoldr;
+package sim.tools.BufferedImagesFoldr;
 
 import java.awt.image.BufferedImage;
 

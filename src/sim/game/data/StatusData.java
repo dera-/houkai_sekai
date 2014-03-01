@@ -1,4 +1,4 @@
-﻿package sim.game.data;
+package sim.game.data;
 
 import java.awt.Container;
 import java.awt.Graphics;

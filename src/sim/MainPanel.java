@@ -1,4 +1,4 @@
-﻿package sim;
+package sim;
 
 import java.awt.Graphics;
 

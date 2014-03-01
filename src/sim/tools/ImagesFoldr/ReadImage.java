@@ -1,4 +1,4 @@
-﻿package sim.tools.ImagesFoldr;
+package sim.tools.ImagesFoldr;
 
 import java.awt.Image;
 import java.awt.Toolkit;

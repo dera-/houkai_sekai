@@ -1,4 +1,4 @@
-﻿package sim.game.data;
+package sim.game.data;
 
 import java.io.BufferedReader;
 import java.io.File;

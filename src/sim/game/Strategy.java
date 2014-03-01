@@ -1,4 +1,4 @@
-﻿package sim.game;
+package sim.game;
 
 import java.awt.*;
 import java.io.BufferedReader;

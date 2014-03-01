@@ -1,4 +1,4 @@
-﻿package sim.game.brain;
+package sim.game.brain;
 
 import java.io.BufferedReader;
 import java.io.File;

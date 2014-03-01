@@ -1,4 +1,4 @@
-﻿package sim.tools;
+package sim.tools;
 
 import java.awt.*;
 import java.awt.image.*;

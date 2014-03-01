@@ -1,4 +1,4 @@
-﻿package sim.game.brain;
+package sim.game.brain;
 
 import java.awt.Point;
 import java.util.ArrayList;

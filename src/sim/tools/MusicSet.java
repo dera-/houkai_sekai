@@ -1,4 +1,4 @@
-﻿package sim.tools;
+package sim.tools;
 
 import java.applet.Applet;
 import java.applet.AudioClip;

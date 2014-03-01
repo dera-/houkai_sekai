@@ -1,4 +1,4 @@
-﻿package sim.game.battle;
+package sim.game.battle;
 
 import java.awt.Color;
 import java.awt.Container;

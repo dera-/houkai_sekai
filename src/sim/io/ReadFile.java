@@ -1,4 +1,4 @@
-﻿package sim.io;
+package sim.io;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

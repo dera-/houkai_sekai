@@ -10,17 +10,19 @@ public class SubMenu extends Select implements SceneForEditor {
 	
 	private static final int CREATE_ENEMY_LIST = 0;
 	private static final int SAVE = 1;
-	private static final int EXIT = 2;
+	private static final int LOAD = 2;
+	private static final int EXIT = 3;
 	
 
 	public SubMenu() {
-		super(0.75, 0.1, 0.5, 0.2, 3, 3);
+		super(0.75, 0.1, 0.5, 0.2, 4, 4);
 		createMenu();
 	}
 
 	private final void createMenu(){
 		Names[CREATE_ENEMY_LIST] = "敵キャラリスト";
 		Names[SAVE] = "セーブ";
+		Names[LOAD] = "ロード";
 		Names[EXIT] = "閉じる";
 		for(int i=0;i<Permits.length;i++){
 			Permits[i] = true;
@@ -34,6 +36,8 @@ public class SubMenu extends Select implements SceneForEditor {
 			return Paramaters.EDITOR_CREATE_ENEMY_LIST;
 		case SAVE: 
 			return Paramaters.EDITOR_STAGE_SAVE;
+		case LOAD:
+			return Paramaters.EDITOR_STAGE_LOAD;
 		case EXIT:
 			return Paramaters.DELETE_NOW_SCENE;
 		default:

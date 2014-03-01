@@ -13,7 +13,7 @@ import sim.tools.MapHandling;
 
 public class RecoverScene extends BattleScene implements Scene {
 	protected int RecoverValue=0;
-	private int[] ExpList={20,30,40};
+	private int[] ExpList={25,25,25};
 	private int JobExp_Normal=2;
 	
 	public RecoverScene(CharaData A,Skill AS,CharaData E,MapHandling handle,boolean first){

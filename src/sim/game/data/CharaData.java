@@ -460,6 +460,7 @@ public class CharaData {
 	
 	/** 引数の経験値を得るメソッド.返り値は上昇したレベル。 */
 	public int getExp(int e){
+		if(Level >= MaxLevel) return 0;
 		if(Experiment+e>=MaxE){
 			int exp=Experiment;
 			Experiment=0;

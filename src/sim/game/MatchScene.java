@@ -84,10 +84,10 @@ public class MatchScene extends Select implements GlobalScene {
 		}
 		if(CharaList.size() >= 1){
 		    CharaData chara1 = CharaList.get(0);
-		    CharaData chara2;
-		    if(CharaList.size() == 1)chara2 = Paramaters.AllyList.get(kettei);
-		    else chara2 = CharaList.get(1);
-		    if(chara1.isMeal() != chara2.isMeal()){
+		    CharaData chara2 = null;
+		    if(CharaList.size() == 1 && kettei != -1)chara2 = Paramaters.AllyList.get(kettei);
+		    else if(CharaList.size() == 2)chara2 = CharaList.get(1);
+		    if(chara2!=null && chara1.isMeal() != chara2.isMeal()){
 		        g.setColor(Color.yellow);
 		        g.drawString("好感度:" + (int)Math.round( 1.0 * chara1.getLikability(chara2.getAllyNumber()) / Paramaters.THRESHOLD_LOVE * 100 ) + "%",
                     (int)Math.round(0.05*Paramaters.Width), (int)Math.round(0.95*Paramaters.Height));
@@ -124,12 +124,12 @@ public class MatchScene extends Select implements GlobalScene {
 
 	@Override
 	public int pushEnter() {
-		if(kettei==-1 || !Permits[kettei])return Paramaters.NON_EVENT;
 		int size=CharaList.size();
-		if(size<2 && pointToNextScreen(cursorX, cursorY)){
+		if(size < 2 && pointToNextScreen(cursorX, cursorY)){
 			jumpNextScreen();
 			return Paramaters.NON_EVENT;
 		}
+		else if(kettei == -1 || !Permits[kettei])return Paramaters.NON_EVENT;
 		switch(size){
 		case 0: CharaList.add(Paramaters.AllyList.get(kettei));
 				break;

@@ -15,11 +15,17 @@ public class ParamaterScene extends Select implements GlobalScene {
 	private ArrayList<CharaData> CharaList; 
 	private String MainMessage;
 	private StatusData Status;  //選んだキャラのステータス
+	private final int nextScene;
 	
 	public ParamaterScene(ArrayList<CharaData> list, String str){
+		this(list, str, Paramaters.STRATEGY_SCENE);
+	}
+	
+	public ParamaterScene(ArrayList<CharaData> list, String str, int sceneNum){
 		super(0.4,0.3,0.5,0.2,8,list.size()+1);
 		CharaList=list;
 		MainMessage=str;
+		nextScene = sceneNum;
 		createMenu();
 	}
 	
@@ -71,7 +77,7 @@ public class ParamaterScene extends Select implements GlobalScene {
 				return Paramaters.NON_EVENT;
 			}
 			else if(kettei==-1) return Paramaters.NON_EVENT;
-			else if(kettei==Names.length-1)return Paramaters.STRATEGY_SCENE;
+			else if(kettei==Names.length-1)return nextScene;
 			else Status = new StatusData(CharaList.get(kettei));
 		}
 		return Paramaters.NON_EVENT;
@@ -83,7 +89,7 @@ public class ParamaterScene extends Select implements GlobalScene {
 			Status=null;
 			return Paramaters.NON_EVENT;
 		}
-		else return Paramaters.STRATEGY_SCENE;
+		else return nextScene;
 	}
 
 	@Override

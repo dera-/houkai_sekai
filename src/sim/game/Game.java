@@ -48,12 +48,6 @@ public class Game implements BaseApplication{
 			GlobalScene pramS = new ParamaterScene(Paramaters.AllyList,"味方キャラの能力確認");
 			GlobalSceneList.add(0,pramS);
 		}
-		else if(num==Paramaters.FRIEND_SCENE){  //新規加入キャラのお知らせのシーンに遷移する
-			GlobalScene pramF = new ParamaterScene(EventData.Friends,"新規加入キャラ");
-			for(CharaData C : EventData.Friends) C.typeToFriend();  //AllyListに追加する前に、キャラタイプを味方キャラに変更
-			Paramaters.addAlly(EventData.Friends);
-			GlobalSceneList.add(0,pramF);
-		}
 		else if(num == Paramaters.JOBCHANGE_SCENE1){  //職業の変更画面(職業を変えるキャラを選択する画面)に遷移する
 			GlobalScene charalist = new CharaListForJob();
 			GlobalSceneList.add(0,charalist);
@@ -120,9 +114,23 @@ public class Game implements BaseApplication{
 			GlobalScene load = new LoadScene();
 			GlobalSceneList.add(0,load);
 		}
-		else if(num == Paramaters.GAME_CLEAR){  //エンディングに移る
-		    GlobalScene ending = new SentenceScene(EventData.getEndingNum(), Paramaters.SAVE_AND_START_SCENE, Paramaters.BGM_ENDING);
-		    GlobalSceneList.add(0,ending);
+		else if(num==Paramaters.FRIEND_SCENE){  //新規加入キャラのお知らせのシーンに遷移する
+			EventData.formatNowEvent();
+			GlobalScene pramF = new ParamaterScene(EventData.Friends,"新規加入キャラ");
+			for(CharaData C : EventData.Friends) C.typeToFriend();  //AllyListに追加する前に、キャラタイプを味方キャラに変更
+			Paramaters.addAlly(EventData.Friends);
+			GlobalSceneList.add(0,pramF);
+		}
+		else if(num == Paramaters.SENTENCE_SCENE){  //シナリオシーンに移る
+		    GlobalScene sentence = new SentenceScene(EventData.getSentenceNum(), Paramaters.STRATEGY_SCENE, null);
+		    EventData.formatNowEvent();
+		    GlobalSceneList.add(0,sentence);
+		}
+		else if(num == Paramaters.FRIEND_SENTENCE_SCENE){  //新規加入キャラのお知らせとシナリオシーンに移る
+			GlobalScene pramF = new ParamaterScene(EventData.Friends,"新規加入キャラ",Paramaters.SENTENCE_SCENE);
+			for(CharaData C : EventData.Friends) C.typeToFriend();  //AllyListに追加する前に、キャラタイプを味方キャラに変更
+			Paramaters.addAlly(EventData.Friends);
+			GlobalSceneList.add(0,pramF);
 		}
 		else if(num == Paramaters.CHECK_SAVE){
 		    GlobalScene checkSave = new CheckScene(Paramaters.EXECUTE_SAVE,"セーブデータを上書きしますか？");
@@ -231,6 +239,11 @@ public class Game implements BaseApplication{
 		}
 		else if(num == Paramaters.DECIDE_CHARACTER){
 			whenCreateChara();
+		}
+		else if(num == Paramaters.SENTENCE_SCENE){  //シナリオシーンに移る
+		    GlobalScene sentence = new SentenceScene(EventData.getSentenceNum(), Paramaters.STRATEGY_SCENE, null);
+		    EventData.formatNowEvent();
+		    GlobalSceneList.add(0,sentence);
 		}
 		return true;
 	}

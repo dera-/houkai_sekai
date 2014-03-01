@@ -12,7 +12,7 @@ public class EventData {
 	private static ArrayList<Integer> FinishedEvents = new ArrayList<Integer>();
 	private static EventData NowEvent;
 	public static ArrayList<CharaData> Friends = new ArrayList<CharaData>();  //新たに仲間に加わるキャラクターのリスト
-	private static HashMap<Integer,Integer> EndingNumbers = new HashMap<Integer,Integer>(); //この番号のイベントをクリアしたら、エンディング。
+	private static HashMap<Integer,Integer> SentenceNumbers = new HashMap<Integer,Integer>(); //この番号のイベントをクリアしたら、エンディング。
 	
 	public final int EventNumber;
 	private String EventName;         //イベントのタイトル
@@ -30,17 +30,15 @@ public class EventData {
 	private Point[] Places;   //味方が配置可能な場所
 	private ArrayList<CharaData_Actually> Allys = new ArrayList<CharaData_Actually>();
 	private ArrayList<CharaData_Actually> Enemies = new ArrayList<CharaData_Actually>();
-	
-	static{
-		EndingNumbers.put(18, 3);
-		EndingNumbers.put(15, 2);		
-	}
-	
 	public EventData(ArrayList<String> list){
 		String identity[]=list.get(0).split(",");
 		EventNumber=Integer.parseInt( identity[0] );
 		EventName=identity[1];
 		eventDetails = identity[2];
+		int sentenceNum = Integer.parseInt(identity[3]);
+		if(sentenceNum > 0){
+			SentenceNumbers.put(EventNumber, sentenceNum);
+		}
 		if(list.get(1).equals(""))ConditionEvent = null;
 		else ConditionEvent=Integer.parseInt( list.get(1) );
 		if(list.get(2).equals(""))DeleteEvent = null;
@@ -207,14 +205,22 @@ public class EventData {
 		FinishedEvents.add(NowEvent.EventNumber);
 		if(NowEvent.commonEventNum != null)FinishedEvents.add(NowEvent.commonEventNum);
 		Paramaters.recoverAllys(); //全味方キャラの回復
-		if( getEndingNum() != null ) return Paramaters.GAME_CLEAR;
+		Integer sentenceNum = getSentenceNum();
+		if(Friends.size() > 0 && sentenceNum != null){
+			return Paramaters.FRIEND_SENTENCE_SCENE;
+		}
+		else if(Friends.size() > 0){
+			return Paramaters.FRIEND_SCENE;
+		}
+		else if(sentenceNum !=null){
+			return Paramaters.SENTENCE_SCENE;
+		}
 		NowEvent=null;
-		if( Friends.size()==0 ) return Paramaters.STRATEGY_SCENE;
-		else return Paramaters.FRIEND_SCENE;
+		return Paramaters.STRATEGY_SCENE;
 	}
 	
-	public static Integer getEndingNum(){
-		return EndingNumbers.get(NowEvent.EventNumber);
+	public static Integer getSentenceNum(){
+		return SentenceNumbers.get(NowEvent.EventNumber);
 	}
 	
 	/** 新たに仲間を加える処理をする(フィールドFirendsにキャラクターを加える)メソッド */
@@ -282,9 +288,13 @@ public class EventData {
 		}
 	}
 	
+	public static void formatNowEvent(){
+		NowEvent = null;
+	}
+	
 	/** ゲームの最初の画面で初めからを選んだ時に呼び出されるメソッド */
 	public static void format(){
-		NowEvent=null;
+		NowEvent = null;
 		FinishedEvents.clear();
 	}
 	

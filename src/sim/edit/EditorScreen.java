@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -106,6 +109,10 @@ public class EditorScreen implements BaseApplication{
 			case Paramaters.EDITOR_STAGE_SAVE:
 				writeFile();
 				break;
+			case Paramaters.EDITOR_STAGE_LOAD:
+				readFile();
+				break;
+			default: break;
 			}
 		}
 		return false;
@@ -243,6 +250,40 @@ public class EditorScreen implements BaseApplication{
 		}
 		
 	}
+	
+	/**
+	 * ファイルから読み込むメソッド
+	 */
+	private void readFile(){
+		String filePath = "load\\data.txt";
+		BufferedReader reader;
+		File file = new File(filePath);
+		if(!file.exists())return;
+		try{
+			reader = new BufferedReader(new FileReader(filePath));
+			mapHandling = new MapHandling(Integer.parseInt(reader.readLine()));
+			String[] strs = reader.readLine().split(",");
+			allys.clear();
+			for(int i=1;i<strs.length;i+=2){
+				CharaData chara = new CharaData();
+				chara.setPlace(Integer.parseInt(strs[i]), Integer.parseInt(strs[i+1]));
+				allys.add(chara);
+			}
+			setEnemies.clear();
+			String data;
+			while((data=reader.readLine())!=null){
+				String[] elems = data.split(",");
+				CharaData enemy = CharaData.searchChara(elems[0]);
+				enemy.setLV(Integer.parseInt(elems[1]));
+				enemy.setPlace(Integer.parseInt(elems[2]), Integer.parseInt(elems[3]));
+				setEnemies.add(enemy);
+			}
+			reader.close();
+		}catch(Exception e){}
+		
+	}
+	
+	
 	
 	/**
 	 * 一時保存用に用いられているグローバル変数の初期化

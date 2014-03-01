@@ -106,6 +106,9 @@ public class Paramaters {
 	
 	public static final int SAVE_AND_START_SCENE = 26; //セーブしてタイトル画面に飛ぶ
 	
+	public static final int SENTENCE_SCENE = 27;
+	
+	public static final int FRIEND_SENTENCE_SCENE = 28;
 	
 	public static final int EDITOR_DECIDE_MAP = 501;
 	
@@ -140,6 +143,8 @@ public class Paramaters {
 	public static final int EDITOR_SET_LEVEL = 516;
 	
 	public static final int EDITOR_SET_CHARA_NUMS = 517;
+	
+	public static final int EDITOR_STAGE_LOAD = 518;
 	
 	/** 以下、BGMのファイル名 */
 	public static final String BGM_OPENNING = "openning2.mp3";

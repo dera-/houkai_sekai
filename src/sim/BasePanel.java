@@ -100,11 +100,11 @@ public abstract class BasePanel extends JPanel implements Runnable,KeyListener,M
 				change = application.decide();
 				break;
 			//エスケープキーが押された時の処理
-			case KeyEvent.VK_ESCAPE: 
+			case KeyEvent.VK_ESCAPE:
 				change = application.cancel();
 				break;
 			//↑キーが押された時の処理
-			case KeyEvent.VK_UP: 
+			case KeyEvent.VK_UP:
 				change = application.direction(BaseApplication.PUSH_UP);
 				break;
 			//↓キーが押された時の処理
@@ -130,17 +130,25 @@ public abstract class BasePanel extends JPanel implements Runnable,KeyListener,M
 		int key = k.getKeyCode();	//キーコードというものを取得する
 		switch(key){
 		//↑キー
-		case 38: InputList.add(KeyEvent.VK_UP);
-		 break;
+		case KeyEvent.VK_UP:
+		case KeyEvent.VK_W:
+			InputList.add(KeyEvent.VK_UP);
+			break;
 		//↓キー
-		case 40: InputList.add(KeyEvent.VK_DOWN);
-		 break;
+		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
+			InputList.add(KeyEvent.VK_DOWN);
+			break;
 		//→キー
-		case 39: InputList.add(KeyEvent.VK_RIGHT);
-		 break;
+		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D:
+			InputList.add(KeyEvent.VK_RIGHT);
+			break;
 		//←キー
-		case 37: InputList.add(KeyEvent.VK_LEFT);
-		 break;
+		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A:
+			InputList.add(KeyEvent.VK_LEFT);
+			break;
 		default: break;
 		}
 	}
@@ -150,11 +158,15 @@ public abstract class BasePanel extends JPanel implements Runnable,KeyListener,M
 		int key = k.getKeyCode();	//キーコードというものを取得する
 		switch(key){
 			//エンターキー
-			case 10: InputList.add(KeyEvent.VK_ENTER);
-				 break;
+			case KeyEvent.VK_ENTER:
+			case KeyEvent.VK_Z:
+				InputList.add(KeyEvent.VK_ENTER);
+			    break;
 			//エスケープキー
-			case 27: InputList.add(KeyEvent.VK_ESCAPE);
-				 break;
+			case KeyEvent.VK_ESCAPE:
+			case KeyEvent.VK_X:
+				InputList.add(KeyEvent.VK_ESCAPE);
+				break;
 			default: break;
 		}
 	}
